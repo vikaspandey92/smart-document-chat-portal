@@ -1,2 +1,8 @@
 # virtual env
 .venv
+
+# environment variables
+.env
+
+# Python cache
+smart_document_chat_portal.egg-info
