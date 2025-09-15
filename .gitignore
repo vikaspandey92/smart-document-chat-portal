@@ -6,3 +6,6 @@
 
 # Python cache
 smart_document_chat_portal.egg-info
+*.pyc
+test.pyc
+__pycache__/
