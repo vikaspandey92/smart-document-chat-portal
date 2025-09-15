@@ -9,3 +9,11 @@ smart_document_chat_portal.egg-info
 *.pyc
 test.pyc
 __pycache__/
+
+#log files
+logs/
+*.log
+
+#data files
+data/
+*.pdf
