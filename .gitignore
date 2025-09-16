@@ -1,19 +1,29 @@
 # virtual env
 .venv
+venv
 
 # environment variables
 .env
 
 # Python cache
 smart_document_chat_portal.egg-info
+dist/
+build/
 *.pyc
 test.pyc
 __pycache__/
 
 #log files
+logs
 logs/
 *.log
 
 #data files
+data
 data/
 *.pdf
+
+# OS & editor files
+.DS_Store
+.vscode/
+.idea/
