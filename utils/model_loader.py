@@ -42,7 +42,7 @@ class ModelLoader:
         '''Load and return the language model based on configuration.'''
         llm_block = self.config['llm']
         log.info("Loading language model...")
-        provider_key = os.getenv("LLM_PROVIDER", "groq") # default
+        provider_key = os.getenv("LLM_PROVIDER", "google") # default
         if provider_key not in llm_block:
             log.error("LLM provider not supported", provider=provider_key)
             raise ValueError(f"LLM provider '{provider_key}' not found in configuration")
