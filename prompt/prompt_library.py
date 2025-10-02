@@ -19,7 +19,15 @@ document_comparison_prompt = ChatPromptTemplate.from_template("""
     Return ONLY the JSON response as specified below.
     {format_instructions}""")
 
+contextualize_question_prompt = ChatPromptTemplate.from_template("""
+    You are a helpful assistant trained to contextualize questions based on provided document content.""")
+
+context_qa_prompt = ChatPromptTemplate.from_template("""
+    You are a helpful assistant trained to answer questions based on provided document content.""")
+
 PROMPT_REGISTERY = {
     "document_analysis": document_analysis_prompt,
     "document_comparison": document_comparison_prompt,
+    "contextualize_question": contextualize_question_prompt,
+    "context_qa": context_qa_prompt  
 }
