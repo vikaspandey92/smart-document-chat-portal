@@ -48,48 +48,89 @@
 # if __name__ == "__main__":
 #     main()
 
-import io
-from pathlib import Path
-from src.document_comparison.data_ingestion import DocumentIngestion
-from src.document_comparison.document_comparator import DocumentComparatorLLM
+# Testing document comparison using DocumentIngestion and DocumentComparatorLLM
+# import io
+# from pathlib import Path
+# from src.document_comparison.data_ingestion import DocumentIngestion
+# from src.document_comparison.document_comparator import DocumentComparatorLLM
 
-# ---- Setup: Load local PDF files as if they were "uploaded" ---- #
-def load_fake_uploaded_file(file_path: Path):
-    return io.BytesIO(file_path.read_bytes())  
+# # ---- Setup: Load local PDF files as if they were "uploaded" ---- #
+# def load_fake_uploaded_file(file_path: Path):
+#     return io.BytesIO(file_path.read_bytes())  
 
-# ---- Step 1: Save and combine PDFs ---- #
-def test_compare_documents():
-    ref_path = Path("/Users/vikaspandey/learning/GenAI/projects/smart-document-chat-portal/data/document_comparison/Long_Report_V1.pdf")
-    act_path = Path("/Users/vikaspandey/learning/GenAI/projects/smart-document-chat-portal/data/document_comparison/Long_Report_V2.pdf")
+# # ---- Step 1: Save and combine PDFs ---- #
+# def test_compare_documents():
+#     ref_path = Path("/Users/vikaspandey/learning/GenAI/projects/smart-document-chat-portal/data/document_comparison/Long_Report_V1.pdf")
+#     act_path = Path("/Users/vikaspandey/learning/GenAI/projects/smart-document-chat-portal/data/document_comparison/Long_Report_V2.pdf")
 
-    class SimulateUpload:
-        def __init__(self, file_path: Path):
-            self.name = file_path.name
-            self._buffer = file_path.read_bytes()
+#     class SimulateUpload:
+#         def __init__(self, file_path: Path):
+#             self.name = file_path.name
+#             self._buffer = file_path.read_bytes()
 
-        def getbuffer(self):
-            return self._buffer
+#         def getbuffer(self):
+#             return self._buffer
 
-    # Instantiate
-    comparator = DocumentIngestion()
-    ref_upload = SimulateUpload(ref_path)
-    act_upload = SimulateUpload(act_path)
+#     # Instantiate
+#     comparator = DocumentIngestion()
+#     ref_upload = SimulateUpload(ref_path)
+#     act_upload = SimulateUpload(act_path)
 
-    # Save files and combine
-    ref_file, act_file = comparator.save_uploaded_files(ref_upload, act_upload)
-    combined_text = comparator.combine_documents()
-    comparator.clean_old_sessions(keep_latest=3)
+#     # Save files and combine
+#     ref_file, act_file = comparator.save_uploaded_files(ref_upload, act_upload)
+#     combined_text = comparator.combine_documents()
+#     comparator.clean_old_sessions(keep_latest=3)
 
-    print("\n Combined Text Preview (First 1000 chars):\n")
-    print(combined_text[:1000])
+#     print("\n Combined Text Preview (First 1000 chars):\n")
+#     print(combined_text[:1000])
 
-    # ---- Step 2: Run LLM comparison ---- #
-    llm_comparator = DocumentComparatorLLM()
-    df = llm_comparator.compare_documents(combined_text)
+#     # ---- Step 2: Run LLM comparison ---- #
+#     llm_comparator = DocumentComparatorLLM()
+#     df = llm_comparator.compare_documents(combined_text)
     
-    print("\n Comparison DataFrame:\n")
-    print(df.head())
+#     print("\n Comparison DataFrame:\n")
+#     print(df.head())
         
+# if __name__ == "__main__":
+#     test_compare_documents()
+
+# Testing ConversationalRAG with a FAISS retriever
+import sys
+from pathlib import Path
+from langchain_community.vectorstores import FAISS
+from src.single_document_chat.data_ingestion import SingleDocIngestor
+from src.single_document_chat.retrieval import ConversationalRAG
+from utils.model_loader import ModelLoader
+
+FAISS_INDEX_PATH = Path("faiss_index")
+
+def test_conversational_rag(pdf_path:str, question:str):
+    try:
+        model_loader = ModelLoader()
+        if FAISS_INDEX_PATH.exists():
+            print("Loading existing FAISS retriever...")
+            embeddings = model_loader.load_embeddings()
+            vector_store = FAISS.load_local(folder_path=str(FAISS_INDEX_PATH), embeddings=embeddings, allow_dangerous_deserialization=True)
+            retriever = vector_store.as_retriever(search_type="similarity", search_kwargs={"k": 5})
+        else:
+            print("Ingesting document and creating FAISS retriever...")
+            with open(pdf_path, "rb") as f:
+                uploaded_files = [f]
+                ingestor = SingleDocIngestor()
+                retriever = ingestor.ingest_files(uploaded_files)
+        print("Running Conversational RAG...")
+        rag = ConversationalRAG(session_id="test_conversational_rag", retriever=retriever)
+        response = rag.invoke(question)
+        print(f"\nQuestion: {question}\n")
+        print(f"Answer: {response}\n")
+    except Exception as e:
+        print(f"Test failed: {e}")
+        sys.exit(1)
+
 if __name__ == "__main__":
-    test_compare_documents()
-    
+    PDF_PATH = r"/Users/vikaspandey/learning/GenAI/projects/smart-document-chat-portal/data/single_document_chat/attention_is_all_you_need.pdf"
+    QUESTION = "What is the significance of the attention mechanism? can you explain it in simple terms?"
+    if not Path(PDF_PATH).exists():
+        print(f"PDF file does not exist: {PDF_PATH}")
+        sys.exit(1)
+    test_conversational_rag(PDF_PATH, QUESTION)

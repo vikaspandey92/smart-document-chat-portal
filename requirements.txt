@@ -10,4 +10,6 @@ sentence-transformers
 structlog
 PyMuPDF
 pandas
+streamlit
+pytest
 -e .
