@@ -31,3 +31,6 @@ data/
 #vector store
 faiss_index
 faiss_index/
+
+#archive
+archive
