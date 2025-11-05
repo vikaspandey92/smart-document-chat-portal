@@ -66,17 +66,17 @@ smart-document-chat-portal/
 │   ├── document_ingestion/       # unified data ingestion service        
 │   │   └── data_ingestion.py     
 │
-├── static/                        # Static web assets
-│   ├── style.css                  # Frontend UI stylesheet
+├── static/                       # Frontend UI stylesheet
+│   ├── style.css                  
 │
-├── templates/                     # HTML templates
+├── templates/                    # HTML template
 │   ├── index.html                
 │
 ├── utils/                        # utility functions
 │   ├── config_loader.py          # loading configurations
 │   ├── document_ops.py           # document operations
 │   ├── model_loader.py           # loading llm and embedding models
-│   └── file_io.py                # Stored embeddings
+│   └── file_io.py                # file input/output operations
 │
 ├── pyproject.toml                 # UV dependencies
 ├── requirements.txt               # Python dependencies
@@ -84,7 +84,7 @@ smart-document-chat-portal/
 ├── test.py                        # testing pipelines
 ├── .gitignore                     # Git ignore rules
 ├── Dockerfile                     # Docker container definition
-└── README.md                      # This file
+└── README.md                      # Project details
 ```
 
 ---
