@@ -13,17 +13,17 @@ Conversation interface for single and multiple documents.
 ---
 
 ## UI snapshot: RAG Apllication for Multi Document Chat
-![Description](image/multi_chat.png)
+![Description](images/multi_chat.png)
 
 ---
 
 ## UI snapshots: Document Analyzer
-![Description](image/document_analyzer.png)
+![Description](images/document_analyzer.png)
 
 ---
 
 ## UI snapshots: Document Comparator
-![Description](image/document_comparator.png)
+![Description](images/document_comparator.png)
 
 ---
 
