@@ -10,7 +10,18 @@ Conversation interface for single and multiple documents.
 - **Multi Document Chat (RAG)**: Upload and process PDF, DOCX, TXT files, create a FAISS index, chat with all the documents
 - **Document Analyzer**: Analyze/Summarize the uploaded PDF document
 - **Document Comparator**: Compare actual and reference pdf documents for the observed differences.
+---
 
+## UI snapshot: RAG Apllication for Multi Document Chat
+![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/vikaspandey/Desktop/Screenshot%202025-11-05%20at%202.25.36%E2%80%AFPM.png?version%3D1762879128197)
+---
+
+## UI snapshots: Document Analyzer
+![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/vikaspandey/Desktop/Screenshot%202025-11-05%20at%202.23.01%E2%80%AFPM.png?version%3D1762879178723)
+---
+
+## UI snapshots: Document Comparator
+![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/vikaspandey/Desktop/Screenshot%202025-11-05%20at%202.24.13%E2%80%AFPM.png?version%3D1762879214311)
 ---
 
 ## 🏗️ Architecture Overview
