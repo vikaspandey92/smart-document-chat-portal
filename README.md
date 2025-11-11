@@ -13,15 +13,18 @@ Conversation interface for single and multiple documents.
 ---
 
 ## UI snapshot: RAG Apllication for Multi Document Chat
-![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/vikaspandey/Desktop/Screenshot%202025-11-05%20at%202.25.36%E2%80%AFPM.png?version%3D1762879128197)
+![Description](image/multi_chat.png)
+
 ---
 
 ## UI snapshots: Document Analyzer
-![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/vikaspandey/Desktop/Screenshot%202025-11-05%20at%202.23.01%E2%80%AFPM.png?version%3D1762879178723)
+![Description](image/document_analyzer.png)
+
 ---
 
 ## UI snapshots: Document Comparator
-![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/vikaspandey/Desktop/Screenshot%202025-11-05%20at%202.24.13%E2%80%AFPM.png?version%3D1762879214311)
+![Description](image/document_comparator.png)
+
 ---
 
 ## 🏗️ Architecture Overview
